@@ -1,0 +1,17 @@
+text The chance is unlikely if not done programmatically.
+    However, imagine the game spawning multiple players at a spawn point,
+    this would be the exact same location. I'm not quite sure what you
+    mean with spin,     what does the integer reflect? Why is it a
+    mismatch between data and structure? The structure does not
+    assume a set amount of objects, it can be anything, that's why new
+    nodes are created. It simply makes sure that there are not more than
+    X leafs inside 1 node. The random is no option of course.
+    My splitting algorithm always created the maximum amount of nodes
+    already, split over the current node. But I guess I have to change
+    already, split over the current node. But I guess I have to change
+    this behaviour? Actually, all the books have different authors. And
+    most have a different location too. There will be some with the same
+    location, but different authors, though. I think my library should be
+    able to store books with the same position. There are never
+    equally-attractive leaf nodes. If a node is split, all childs will
+    reflect a different part of the parent node.
