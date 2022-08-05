@@ -6,6 +6,32 @@ import java.util.List;
 
 public class KthLargestNumber {
 
+    static void quicksort(int[] arr, int left, int right) {
+        if (left < right) {
+            int pivotFinalRestingPosition = partitionEnhanced(arr, left, right);
+            quicksort(arr, left, pivotFinalRestingPosition - 1);
+            quicksort(arr, pivotFinalRestingPosition + 1, right);
+        }
+    }
+
+    static int partitionEnhanced(int[] arr, int left, int right) {
+        int pivot = arr[right];
+        int i = left-1;
+        for (int j = left; j < right; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                swap(arr, i,j);
+            }
+        }
+        swap(arr, i+1,right);
+        return i+1;
+    }
+
+    static void swap(int[] arr, int first, int second) {
+        int temp = arr[first];
+        arr[first] = arr[second];
+        arr[second] = temp;
+    }
 
     public static void mergeSort(int[] A, int i, int j, int k) {
         if (i >= j)
@@ -47,10 +73,10 @@ public class KthLargestNumber {
     }
 
     // Worst Solution with merge sort
-// 32 / 32 test cases passed.
-//Status: Accepted
-//Runtime: 198 ms
-//Memory Usage: 187.2 MB
+    // 32 / 32 test cases passed.
+    // Status: Accepted
+    // Runtime: 198 ms
+    // Memory Usage: 187.2 MB
     public static int findKthLargestMergeSort(int[] nums, int k) {
         if (k > nums.length)
             return 0;
@@ -66,7 +92,7 @@ public class KthLargestNumber {
     //Your runtime beats 44.88 % of java submissions.
     // You are here!
     //Your memory usage beats 90.16 % of java submissions
-    public int findKthLargest(int[] nums, int k) {
+    public int findKthLargest1(int[] nums, int k) {
         if (k > nums.length)
             return 0;
         List<Integer> set = new ArrayList<>();
@@ -87,7 +113,29 @@ public class KthLargestNumber {
         return 0;
     }
 
+    public static int findKthLargest(int[] nums, int k) {
+        if (k > nums.length)
+            return 0;
+        int left = 0;
+        int right = nums.length-1;
+        while(left < right) {
+            int pivotPos = partitionEnhanced(nums, left, right);
+            if(pivotPos == nums.length - k)
+                return nums[nums.length - k];
+            if(pivotPos > nums.length-k) {
+                right = pivotPos - 1;
+            } else {
+                left = pivotPos + 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
-        System.out.println(findKthLargestMergeSort(new int[]{5, 3, 2, 3, 4,  4, 6, 1}, 3));
+        // 65443321
+        System.out.println(findKthLargest(new int[]{5, 3, 2, 3, 4,  4, 6, 1}, 3));
+        // 5341
+        System.out.println(findKthLargest(new int[]{5, 5, 5, 3, 4,  4, 5, 1}, 3));
+        System.out.println(findKthLargest(new int[]{3,2,1,5,6,4}, 2));
     }
 }

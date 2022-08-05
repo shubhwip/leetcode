@@ -1,6 +1,12 @@
 package medium.sortingsearching;
 
-public class Search2DMatrix {
+// https://leetcode.com/problems/search-a-2d-matrix-ii/
+// Four Approaches
+// Brute Force Search in entire matrix O(mxn)
+// Binary Search in rows O(mlogn)
+// Binary Search Optimized O(m+n) https://leetcode.com/problems/search-a-2d-matrix-ii/discuss/642522/Java-Solution-with-Explaination-Faster-than-100
+// Divide And Conquer https://leetcode.com/problems/search-a-2d-matrix-ii/discuss/66147/*Java*-an-easy-to-understand-divide-and-conquer-method
+public class Search2DMatrixII {
     public static boolean searchRow(int[][] matrix, int target, int p, int r, int c) {
         System.out.println("Row" + "," + p + "," + r + "," + c + "," );
         if(p<c-1)
@@ -72,6 +78,56 @@ public class Search2DMatrix {
         }
         return false;
     }
+
+    public boolean searchMatrixMostOptimized(int[][] matrix, int target) {
+        if(matrix == null || matrix.length < 1 || matrix[0].length <1) {
+            return false;
+        }
+        int col = matrix[0].length-1;
+        int row = 0;
+        while(col >= 0 && row <= matrix.length-1) {
+            if(target == matrix[row][col]) {
+                return true;
+            } else if(target < matrix[row][col]) {
+                col--;
+            } else if(target > matrix[row][col]) {
+                row++;
+            }
+        }
+        return false;
+    }
+
+    // Solved 2nd time with some Mistakes
+    // Mistake 1 : Binary Search Algorithm : had to correct multiple times
+    // Mistake 2 : Putting Semicolon at the end of loop
+    public static boolean search(int[][] matrix, int target, int i, int m, int n) {
+        int low = 0;
+        int high = n-1;
+        while(low <= high) {
+            int mid = (low+high)/2;
+            if(matrix[i][mid] == target) {
+                return true;
+            }
+            else if(matrix[i][mid] < target) {
+                low = mid + 1;
+            }
+            else {
+                high = mid - 1;
+            }
+        }
+        return false;
+    }
+
+
+
+    public boolean searchMatrix1(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        if(search(matrix, target, 0, m, n))
+            return true;
+        return false;
+    }
+
     public static void main(String[] args) {
         int[][] arr = new int[][]{
             {1,2},
