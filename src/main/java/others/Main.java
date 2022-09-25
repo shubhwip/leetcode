@@ -91,5 +91,24 @@ public class Main {
             }
             System.out.println(sb.toString());
         }
+        Queue<int[]> pq = new PriorityQueue<>((a, b) -> {
+            if(b[0] == a[0]){
+                return a[1] - b[1];
+            }
+            return a[0] - b[0];
+        });
+        int[][] properties = new int[][] {{1,2},{3,4}};
+        for(int[] row : properties) {
+            pq.offer(Arrays.stream(row).map(a->new Integer(a)).toArray());
+        }
+        Arrays.sort(properties, (a,b)-> {
+            if(b[0] == a[0]){
+                return b[1] - a[1];
+            }
+            return b[0] - a[0];
+        });
+        List<Integer> l = Arrays.asList(1,3,4,57,9,2);
+        l.stream().mapToInt(a->a).max().getAsInt();
+
     }
 }

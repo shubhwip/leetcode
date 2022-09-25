@@ -1,7 +1,11 @@
 package easy.tree;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 // Definition for a binary tree node.
 class TreeNode {
@@ -78,6 +82,6 @@ public class TreeOperations {
     }
 
     public static void main(String[] args) {
-
+        
     }
 }

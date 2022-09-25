@@ -1,6 +1,9 @@
 package others;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Test {
@@ -134,5 +137,10 @@ public class Test {
         Stream.of(sumSubArray(intarr1)).map(Arrays::toString).forEach(System.out::println);
         Stream.of(sumSubArray(intarr2)).map(Arrays::toString).forEach(System.out::println);
         Stream.of(sumSubArray(intarr3)).map(Arrays::toString).forEach(System.out::println);
+
+        List<List<Integer>> traversal = new ArrayList<>();
+        List<Double> res = traversal.stream()
+                .map(c -> c.stream().mapToDouble(a -> a).average().getAsDouble())
+                .collect(Collectors.toList());
     }
 }

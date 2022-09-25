@@ -1,7 +1,6 @@
 package others;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 class Result {
@@ -77,7 +76,16 @@ class Result {
 
     public static void main(String[] args) {
         // 2
-        System.out.println(programmerStrings("progxrammerrxproxgrammer"));
+        //System.out.println(programmerStrings("progxrammerrxproxgrammer"));
+        List<Integer> l = Arrays.asList(1,4,6,2,8);
+        Comparator<Integer> c = getCom(l);
+        l.sort(c);
+        System.out.println(l);
+    }
+
+
+    private static Comparator<Integer> getCom(List<Integer> l) {
+        return Comparator.comparingInt(a -> -a);
     }
 
 }
